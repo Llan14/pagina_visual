@@ -1,7 +1,12 @@
 import 'package:flutter/material.dart';
 
 class MyAppBar extends StatelessWidget implements PreferredSizeWidget {
-  const MyAppBar({super.key});
+  // El campo 'title' debe ser final si no se modifica.
+  final String title;
+
+  // Constructor único y correcto
+  const MyAppBar(
+      {super.key, required this.title}); // Solo este constructor es necesario
 
   @override
   Widget build(BuildContext context) {
@@ -24,13 +29,16 @@ class MyAppBar extends StatelessWidget implements PreferredSizeWidget {
       // Título con tipografía y color similares al logo de VS Code
       title: Row(
         mainAxisAlignment: MainAxisAlignment.center,
-        children: const [
-          Icon(Icons.code_rounded,
+        children: [
+          // Removido 'const' aquí porque el Text usa el 'title' de la clase que puede variar.
+          const Icon(Icons.code_rounded,
               color: Color(0xFF22A6F2)), // Azul característico VS Code
-          SizedBox(width: 8),
+          const SizedBox(width: 8),
           Text(
-            "Visual Studio Clone",
-            style: TextStyle(
+            // Usamos el 'title' de la clase aquí
+            title, // Aquí se usa la variable 'title' pasada al constructor
+            style: const TextStyle(
+              // El TextStyle puede ser const si todos sus parámetros son const
               fontFamily: 'RobotoMono',
               fontWeight: FontWeight.bold,
               fontSize: 20,
@@ -49,7 +57,10 @@ class MyAppBar extends StatelessWidget implements PreferredSizeWidget {
       leading: IconButton(
         icon: const Icon(Icons.menu, color: Colors.white),
         tooltip: 'Menú',
-        onPressed: () {},
+        onPressed: () {
+          // TODO: Implementar acción para el menú (ej. abrir un Drawer)
+          Scaffold.of(context).openDrawer(); // Ejemplo: abrir el Drawer
+        },
       ),
 
       // Íconos de acciones (modo oscuro, buscar, configuración)
@@ -57,17 +68,29 @@ class MyAppBar extends StatelessWidget implements PreferredSizeWidget {
         IconButton(
           icon: const Icon(Icons.search_rounded, color: Colors.white),
           tooltip: 'Buscar',
-          onPressed: () {},
+          onPressed: () {
+            // TODO: Implementar acción de búsqueda
+          },
         ),
         IconButton(
           icon: const Icon(Icons.brightness_6_rounded, color: Colors.white),
           tooltip: 'Cambiar tema',
-          onPressed: () {},
+          onPressed: () {
+            // TODO: Implementar lógica para cambiar tema
+          },
         ),
         PopupMenuButton<String>(
           icon: const Icon(Icons.more_vert, color: Colors.white),
           onSelected: (value) {
             // Acciones del menú
+            // print('Seleccionado: $value');
+            if (value == 'perfil') {
+              // Navegar a perfil
+            } else if (value == 'config') {
+              // Navegar a configuración
+            } else if (value == 'salir') {
+              // Lógica para cerrar sesión
+            }
           },
           itemBuilder: (BuildContext context) {
             return [

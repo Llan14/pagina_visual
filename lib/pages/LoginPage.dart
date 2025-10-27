@@ -14,7 +14,9 @@ class _LoginPageState extends State<LoginPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: const MyAppBar(), // Usa el AppBar estilo Visual
+      // --- CORRECCIÓN 1: MyAppBar requiere el parámetro 'title' ---
+      appBar:
+          const MyAppBar(title: "Iniciar Sesión"), // Le pasamos un título aquí
       body: SafeArea(
         child: Container(
           decoration: const BoxDecoration(
@@ -28,7 +30,9 @@ class _LoginPageState extends State<LoginPage> {
               end: Alignment.bottomCenter,
             ),
           ),
+          // --- MEJORA: Centrar el botón dentro del Container ---
           child: Center(
+            // Agregamos un Center widget para centrar el botón
             child: ElevatedButton(
               onPressed: () {
                 Navigator.push(
@@ -68,7 +72,9 @@ class NowPlayPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: const MyAppBar(),
+      // --- CORRECCIÓN 2: MyAppBar requiere el parámetro 'title' ---
+      appBar: const MyAppBar(
+          title: "Ahora Reproduciendo"), // Le pasamos un título aquí
       body: const Center(
         child: Text(
           "Bienvenido a NowPlayPage 🎵",

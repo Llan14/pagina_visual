@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:proyect1/Widgets/MyRichText.dart';
-import 'package:proyect1/widgets/myicon.dart';
-import 'package:proyect1/Widgets/MyImage.dart';
+import 'package:proyect1/Widgets/MyImage.dart'; // <--- ¡Asegúrate de que esta línea esté presente!
 import 'package:proyect1/Widgets/Mybuttons.dart';
 import 'package:proyect1/Widgets/MyAppBar.dart';
 
@@ -27,14 +25,18 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.blue,
-      appBar: MyAppBar(),
+      appBar: MyAppBar(title: widget.title),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Myimage(),
-            SizedBox(height: 20),
+            Myimage(), // Aquí ya no debería dar error si el import está bien y la clase existe.
+            const SizedBox(height: 20),
             MyButtons(),
+            Text(
+              'Contador: $_counter',
+              style: Theme.of(context).textTheme.headlineMedium,
+            ),
           ],
         ),
       ),

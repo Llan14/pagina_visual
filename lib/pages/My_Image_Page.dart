@@ -9,11 +9,13 @@ class MyImagePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       // 2. Usa tu widget personalizado aquí en lugar del AppBar por defecto
-      appBar: const MyAppBar(), // <-- ¡Aquí lo insertas!
+      // --- CORRECCIÓN IMPORTANTE AQUÍ: MyAppBar requiere el parámetro 'title' ---
+      appBar: const MyAppBar(
+          title: "Mi Página de Imagen"), // <-- ¡Le pasas un título!
 
       body: Center(
         child: Image.asset(
-          'assets/images/hola.png',
+          'assets/images/hola.png', // Asegúrate de que esta ruta sea correcta y esté en pubspec.yaml
           width: 500,
           height: 500,
           fit: BoxFit.fill,
